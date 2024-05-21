@@ -111,7 +111,7 @@ async function getFileHTML(fileId) {
     );
 }
 
-mongoose.connect(process.env.DATABASE_URL);
+mongoose.connect(baseURL);
 const db = mongoose.connection;
 db.on('error', error => console.error(error));
 db.on('open', () => console.log('Connected to Mongoose'));
