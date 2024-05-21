@@ -117,7 +117,7 @@ const db = mongoose.connection;
 db.on('error', error => console.error(error));
 db.on('open', () => console.log('Connected to Mongoose'));
 app.use(express.json());
-app.use(upload.array());
+//app.use(upload.array());
 
 app.set('view engine', 'ejs');
 
