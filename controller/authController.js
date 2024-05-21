@@ -23,5 +23,5 @@ module.exports.register_post = async (req, res) => {
 }
 
 module.exports.login_post = async (req, res) => {
-    
+    res.send('new login');
 }
