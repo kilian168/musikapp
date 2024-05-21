@@ -8,11 +8,12 @@ const fs = require('fs');
 const FormData = require('form-data');
 const app = express();
 const mongoose = require('mongoose');
-const indexRouter = require('./routes/index')
+const indexRouter = require('./routes/authRouter')
 const multer = require('multer');
 const { MongoClient, GridFSBucket } = require('mongodb');
 const { GridFsStorage } = require('multer-gridfs-storage');
 const path = require('path');
+const authRoutes = require('./routes/authRouter');
 
 const apiKey = '663fc94f351eb02337c597ba';
 const baseURL = process.env.DATABASE_URL;
@@ -61,7 +62,6 @@ async function uploadFileVideo(filePath) {
         }
     );
 }
-
 async function getFileAudio(fileId) {
     await client.connect();
     const db = client.db(dbName);
@@ -78,7 +78,6 @@ async function getFileAudio(fileId) {
         }
     );
 }
-
 async function getFileVideo(fileId) {
     await client.connect();
     const db = client.db(dbName);
@@ -118,28 +117,10 @@ db.on('error', error => console.error(error));
 db.on('open', () => console.log('Connected to Mongoose'));
 
 app.set('view-engine', 'ejs')
-app.use(express.urlencoded( {extended: false} ))
+app.use(authRoutes)
 
 app.get('/', (req, res) => {
     res.render('index.ejs', { name: 'Kilian' })
 })
-
-app.get('/login', (req, res) => {
-    res.render('login.ejs')
-})
-
-app.get('/register', (req, res) => {
-    res.render('register.ejs')
-})
-
-app.post('/login', (req, res) => {
-    res.render('login.ejs')
-})
-
-app.post('/register', (req, res) => {
-    res.body.name
-})
-
-app.use('/', indexRouter)
 
 app.listen(process.env.PORT || 3000)
