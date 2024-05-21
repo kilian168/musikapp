@@ -33,6 +33,20 @@ async function uploadFileAudio(filePath) {
         }
     );
 }
+async function uploadFileHTML(filePath) {
+    await client.connect();
+    const db = client.db(dbName);
+    const bucket = new GridFSBucket(db, { bucketName: 'myfiles' });
+    
+    const uploadStream = bucket.openUploadStream('file.html');
+    fs.createReadStream(filePath).pipe(uploadStream)
+        .on('error', (error) => console.error('Error uploading file:', error))
+        .on('finish', () => {
+            console.log('File uploaded successfully');
+            client.close();
+        }
+    );
+}
 async function uploadFileVideo(filePath) {
     await client.connect();
     const db = client.db(dbName);
@@ -66,6 +80,22 @@ async function getFileAudio(fileId) {
 }
 
 async function getFileVideo(fileId) {
+    await client.connect();
+    const db = client.db(dbName);
+    const bucket = new GridFSBucket(db, { bucketName: 'myfiles' });
+
+    const downloadStream = bucket.openDownloadStream(fileId);
+    const writeStream = fs.createWriteStream('downloaded_file.mp4');
+    
+    downloadStream.pipe(writeStream)
+        .on('error', (error) => console.error('Error downloading file:', error))
+        .on('finish', () => {
+            console.log('File downloaded successfully');
+            client.close();
+        }
+    );
+}
+async function getFileHTML(fileId) {
     await client.connect();
     const db = client.db(dbName);
     const bucket = new GridFSBucket(db, { bucketName: 'myfiles' });
