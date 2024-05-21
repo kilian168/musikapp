@@ -11,5 +11,5 @@ module.exports.register_post = (req, res) => {
 }
 
 module.exports.login_post = (req, res) => {
-    res.send('logged in');
+    res.send('new login');
 }

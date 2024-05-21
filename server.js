@@ -116,15 +116,10 @@ const db = mongoose.connection;
 db.on('error', error => console.error(error));
 db.on('open', () => console.log('Connected to Mongoose'));
 
-app.set('view-engine', 'ejs')
-app.use(authRoutes)
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
     res.render('index.ejs', { name: 'Kilian' })
-})
-
-app.get('/login', (req, res) => {
-    res.render('login.ejs')
-})
-
+});
+app.use(authRoutes);
 app.listen(process.env.PORT || 3000)
