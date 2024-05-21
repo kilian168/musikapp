@@ -115,6 +115,8 @@ mongoose.connect(baseURL);
 const db = mongoose.connection;
 db.on('error', error => console.error(error));
 db.on('open', () => console.log('Connected to Mongoose'));
+app.use(express.json());´
+app.use(express.FormData());
 
 app.set('view engine', 'ejs');
 

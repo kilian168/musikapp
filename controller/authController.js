@@ -7,9 +7,9 @@ module.exports.login_get = (req, res) => {
 }
 
 module.exports.register_post = (req, res) => {
-    res.send('new register');
+    res.send(req.body);
 }
 
 module.exports.login_post = (req, res) => {
-    res.send('new login');
+    res.send(req.body);
 }
