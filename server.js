@@ -115,14 +115,15 @@ async function getFileHTML(fileId) {
 mongoose.connect(baseURL);
 const db = mongoose.connection;
 db.on('error', error => console.error(error));
-db.on('open', () => console.log('Connected to Mongoose'));
+db.on('open', () => console.log(`Connected to DATABASE: ${dbName}`));
 app.use(express.json());
-//app.use(upload.array());
+app.use(upload.array());
 
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
     res.render('index.ejs', { name: 'Kilian' })
 });
+
 app.use(authRoutes);
 app.listen(process.env.PORT || 3000)

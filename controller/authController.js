@@ -13,8 +13,8 @@ module.exports.login_get = (req, res) => {
 module.exports.register_post = async (req, res) => {
     const {username, name, lehrer, password} = req.body;
     try {
-        const schüler = await User.create({ username, name, lehrer, password});
-        res.status(201).json(user);
+        const schüler = await Schüler.create({ username, name, lehrer, password});
+        res.status(201).json(schüler);
     }
     catch(err) {
         console.log(err);
