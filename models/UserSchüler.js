@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
  
 const sSchema = new mongoose.Schema({
@@ -14,7 +15,7 @@ const sSchema = new mongoose.Schema({
         lowercase: false,
     },
     lehrer: {
-        type: mongoose.Schema,
+        type: ObjectId,
         required: true,
         unique: false,
         lowercase: false
