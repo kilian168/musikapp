@@ -1,5 +1,7 @@
 const Schüler = require('../models/UserSchüler');
 const Lehrer = require('../models/UserLehrer');
+const { default: mongoose } = require('mongoose');
+const client = new MongoClient(process.env.DATABASE_URL);
 
 
 module.exports.register_get = (req, res) => {
@@ -12,6 +14,7 @@ module.exports.login_get = (req, res) => {
 
 module.exports.register_post = async (req, res) => {
     const {username, name, lehrer, password} = req.body;
+    
     try {
         const schüler = await Schüler.create({ username, name, lehrer, password});
         res.status(201).json(schüler);

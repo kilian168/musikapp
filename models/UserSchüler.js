@@ -14,7 +14,7 @@ const sSchema = new mongoose.Schema({
         lowercase: false,
     },
     lehrer: {
-        type: String,
+        type: mongoose.Schema,
         required: true,
         unique: false,
         lowercase: false
