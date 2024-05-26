@@ -16,7 +16,7 @@ const { GridFsStorage } = require('multer-gridfs-storage');
 const path = require('path');
 const authRoutes = require('./routes/authRouter');
 
-const apiKey = '663fc94f351eb02337c597ba';
+const apiKey = 'APIKEY';
 const baseURL = process.env.DATABASE_URL;
 const dbName = 'LCAppTest';
 const client = new MongoClient(baseURL);
